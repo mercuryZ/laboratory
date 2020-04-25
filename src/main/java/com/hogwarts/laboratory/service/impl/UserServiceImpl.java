@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService {
     public SysUser getUser(String username) {
         return userDao.getUser(username);
     }
+
+    @Override
+    public int updateUser(String username, String password) {
+       return userDao.updateUser(username, password);
+    }
 }
