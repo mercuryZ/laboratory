@@ -11,6 +11,6 @@ public interface UserDao {
     @Select("select * from sys_user t where t.username = #{username}")
     SysUser getUser(String username);
 
-    @Update("update sys_user set password = #{password} where username = #{username}")
-    int updateUser(String username, String password);
+    @Select("select * from sys_user t where t.username = #{username} and t.password = #{password}")
+    SysUser updateUser(String username, String password);
 }

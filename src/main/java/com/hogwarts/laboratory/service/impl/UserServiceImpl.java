@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
 
@@ -19,7 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateUser(String username, String password) {
-       return userDao.updateUser(username, password);
+    public SysUser updateUser(String username, String password)   {
+        return userDao.updateUser(username, password);
+
     }
 }

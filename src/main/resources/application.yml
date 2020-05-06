@@ -34,3 +34,7 @@ mybatis:
 
 server:
   port: 9090
+
+api-url: /api
+
+
