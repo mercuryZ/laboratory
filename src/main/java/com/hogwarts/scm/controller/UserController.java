@@ -1,9 +1,8 @@
-package com.hogwarts.laboratory.controller;
+package com.hogwarts.scm.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.hogwarts.laboratory.dao.UserDao;
-import com.hogwarts.laboratory.model.SysUser;
-import com.hogwarts.laboratory.service.UserService;
+import com.hogwarts.scm.dao.UserDao;
+import com.hogwarts.scm.model.SysUser;
+import com.hogwarts.scm.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

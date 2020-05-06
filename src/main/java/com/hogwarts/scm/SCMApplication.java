@@ -1,4 +1,4 @@
-package com.hogwarts.laboratory;
+package com.hogwarts.scm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

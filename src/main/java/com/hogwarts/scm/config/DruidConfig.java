@@ -1,4 +1,4 @@
-package com.hogwarts.laboratory.config;
+package com.hogwarts.scm.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;

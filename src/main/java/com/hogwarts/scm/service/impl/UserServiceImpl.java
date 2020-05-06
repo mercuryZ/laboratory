@@ -1,8 +1,8 @@
-package com.hogwarts.laboratory.service.impl;
+package com.hogwarts.scm.service.impl;
 
-import com.hogwarts.laboratory.dao.UserDao;
-import com.hogwarts.laboratory.model.SysUser;
-import com.hogwarts.laboratory.service.UserService;
+import com.hogwarts.scm.dao.UserDao;
+import com.hogwarts.scm.model.SysUser;
+import com.hogwarts.scm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

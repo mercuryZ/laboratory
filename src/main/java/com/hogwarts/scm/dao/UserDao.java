@@ -1,10 +1,9 @@
-package com.hogwarts.laboratory.dao;
+package com.hogwarts.scm.dao;
 
 
-import com.hogwarts.laboratory.model.SysUser;
+import com.hogwarts.scm.model.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserDao {

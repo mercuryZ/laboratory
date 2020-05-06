@@ -1,6 +1,6 @@
-package com.hogwarts.laboratory.service;
+package com.hogwarts.scm.service;
 
-import com.hogwarts.laboratory.model.SysUser;
+import com.hogwarts.scm.model.SysUser;
 
 public interface UserService {
     SysUser getUser(String username);

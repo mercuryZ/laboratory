@@ -1,4 +1,4 @@
-package com.hogwarts.laboratory.model;
+package com.hogwarts.scm.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
