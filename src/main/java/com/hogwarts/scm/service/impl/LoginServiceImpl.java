@@ -1,4 +1,4 @@
 package com.hogwarts.scm.service.impl;
 
-public class LoginServiceImple {
+public class LoginServiceImpl {
 }

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
-  
   <head>
     <meta charset="UTF-8">
     <title>新增用户信息</title>
     <header th:replace="header::html"></header>
   </head>
-  
   <body>
     <div class="x-body">
       <form class="layui-form">
@@ -159,22 +157,24 @@
 
       });
       function getAllRole(callback){
-          $.ajax({
-              url:"/role/all",
-              type:"GET",
-              dataType:'json',
-              success:function(result){
-                  var html = "";
-                  if(result.datas && result.datas.length > 0){
-                      for(i in result.datas ){
-                          html += '<input type="radio"  name="roleId" value="'+result.datas[i].id+'" title="'+result.datas[i].name+'" >' +
-                              '<div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>'+result.datas[i].name+'</div></div>';
-                      }
-                      $(".show-role-container").html(html);
-                      callback();
-                  }
+        $.ajax({
+          url:"/role/all",
+          type:"GET",
+          dataType:'json',
+          success:function(result){
+            var html = "";
+            if(result.datas && result.datas.length > 0){
+              for(i in result.datas ){
+                html += '<input type="radio"  name="roleId" value="'
+                    +result.datas[i].id+'" title="'+result.datas[i].name+'" >' +
+                    '<div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>'
+                    +result.datas[i].name+'</div></div>';
               }
-          });
+              $(".show-role-container").html(html);
+              callback();
+            }
+          }
+        });
       }
   </script>
   </body>

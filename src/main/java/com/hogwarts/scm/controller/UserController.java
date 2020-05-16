@@ -64,7 +64,7 @@ public class UserController {
 
     @RequestMapping("/add")
     public String addUser(Model model) {
-        model.addAttribute(new SysUser());
-        return "user/add-user";
+        model.addAttribute(new SysUser()); // 与user-add.html中${sysUser.name}对应
+        return "user/user-add";
     }
 }
