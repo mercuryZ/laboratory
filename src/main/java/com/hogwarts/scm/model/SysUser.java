@@ -13,14 +13,14 @@ public class SysUser extends BaseEntity<Long>{
     private String username;
     private String password;
     private String nickname;
-    private String telephone;
+    private String headImgUrl;
     private String phone;
+    private String telephone;
     private String email;
-    private String sex;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+    private Integer sex;
     private Integer status;
-    private String mark;
 
     public interface Status {
         int DISABLED = 0;

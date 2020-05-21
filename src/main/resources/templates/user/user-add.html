@@ -58,13 +58,13 @@
               </div>
           </div>
         <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>邮件
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" th:value="${sysUser.email}" name="email" required="" lay-verify="email" autocomplete="off" class="layui-input">
-              </div>
+          <label for="L_email" class="layui-form-label">
+              <span class="x-red">*</span>邮件
+          </label>
+          <div class="layui-input-inline">
+              <input type="text" id="L_email" th:value="${sysUser.email}" name="email" required="" lay-verify="email" autocomplete="off" class="layui-input">
           </div>
+        </div>
         <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">生日</label>
                 <div class="layui-input-inline">
@@ -72,25 +72,23 @@
                 </div>
             </div>
         <div class="layui-form-item">
-                <label class="layui-form-label">性别</label>
-                <div class="layui-input-block">
-                    <input type="radio" th:value="${sysUser.sex}" name="sex" value="1" title="男" checked="">
-                    <input type="radio" th:value="${sysUser.sex}" name="sex" value="0" title="女">
-                </div>
-            </div>
+          <label class="layui-form-label">性别</label>
+          <div class="layui-input-block">
+            <input type="radio" th:valuetype="${sysUser.sex}" name="sex" value="1" title="男" checked="">
+            <input type="radio" th:valuetype="${sysUser.sex}" name="sex" value="0" title="女">
+          </div>
+        </div>
         <input type="text" id="roleId"  name="roleId" style="display:none;"/>
         <div class="layui-form-item">
-                <label class="layui-form-label">角色</label>
-                <div class="layui-input-block show-role-container">
-                </div>
-            </div>
+          <label class="layui-form-label">角色</label>
+          <div class="layui-input-block show-role-container"></div>
+        </div>
         <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-              </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
-              </button>
-          </div>
+          <label for="L_email" class="layui-form-label"></label>
+          <button  class="layui-btn" lay-filter="add" lay-submit="">
+            增加
+          </button>
+        </div>
       </form>
     </div>
 
@@ -127,34 +125,33 @@
 
       //监听提交
         form.on('submit(add)', function(data){
-            var rolelRadio = $("[name=roleId]:checked");
-            if(rolelRadio == undefined || rolelRadio.length <= 0){
-                layer.alert("请给该用户设置角色");
-                return false;
+          var rolelRadio = $("[name=roleId]:checked");
+          if(rolelRadio == undefined || rolelRadio.length <= 0){
+            layer.alert("请给该用户设置角色");
+            return false;
+          }
+          data.field.roleId = rolelRadio.val();
+          console.log("shangshuo"+data.field.roleId);
+          $.ajax({
+            url:"/user/add",
+            type:"POST",
+            data:data.field,
+            dataType:'json',
+            success:function(result){
+              if(result.code == 500 || result.code == 5000100 || result.code == 5000101 || result.code == 5000102){
+                layer.alert(result.msg);
+              }else{
+                layer.alert("设置成功", {icon: 6},function () {
+                  //关闭当前frame
+                  xadmin.close();
+                  // 可以对父窗口进行刷新
+                  xadmin.father_reload();
+                });
+              }
             }
-            data.field.roleId = rolelRadio.val();
-            $.ajax({
-                url:"/user/add",
-                type:"POST",
-                data:data.field,
-                dataType:'json',
-                success:function(result){
-                    if(result.code == 500 || result.code == 5000100 || result.code == 5000101 || result.code == 5000102){
-                        layer.alert(result.msg);
-                    }else{
-                        layer.alert("设置成功", {icon: 6},function () {
-                            //关闭当前frame
-                            xadmin.close();
-                            // 可以对父窗口进行刷新
-                            xadmin.father_reload();
-                        });
-                    }
-                }
-            });
+          });
           return false;
         });
-
-
       });
       function getAllRole(callback){
         $.ajax({
@@ -166,9 +163,9 @@
             if(result.datas && result.datas.length > 0){
               for(i in result.datas ){
                 html += '<input type="radio"  name="roleId" value="'
-                    +result.datas[i].id+'" title="'+result.datas[i].name+'" >' +
-                    '<div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>'
-                    +result.datas[i].name+'</div></div>';
+                  +result.datas[i].id+'" title="'+result.datas[i].name+'" >' +
+                  '<div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>'
+                  +result.datas[i].name+'</div></div>';
               }
               $(".show-role-container").html(html);
               callback();

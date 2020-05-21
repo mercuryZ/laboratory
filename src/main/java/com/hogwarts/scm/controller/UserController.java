@@ -3,14 +3,22 @@ package com.hogwarts.scm.controller;
 import com.hogwarts.scm.base.result.PageTableRequest;
 import com.hogwarts.scm.base.result.Results;
 import com.hogwarts.scm.dao.UserDao;
+import com.hogwarts.scm.dto.UserDto;
 import com.hogwarts.scm.model.SysUser;
 import com.hogwarts.scm.service.UserService;
+import com.hogwarts.scm.util.MD5;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.context.request.WebRequest;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("user")
@@ -67,4 +75,20 @@ public class UserController {
         model.addAttribute(new SysUser()); // 与user-add.html中${sysUser.name}对应
         return "user/user-add";
     }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public Results<SysUser> saveUser(UserDto userDto, Integer roleId) {
+        userDto.setStatus(1);
+        userDto.setPassword(MD5.crypt(userDto.getPassword()));
+        System.out.println(userDto.toString()+roleId);
+        return userService.save(userDto, roleId);
+    }
+
+    String pattern = "yyyy-MM-dd";
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat(pattern), true));
+    }
+
 }

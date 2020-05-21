@@ -1,7 +1,11 @@
 package com.hogwarts.scm.service.impl;
 
 import com.hogwarts.scm.base.result.Results;
+import com.hogwarts.scm.dao.RoleUserDao;
 import com.hogwarts.scm.dao.UserDao;
+import com.hogwarts.scm.dto.UserDto;
+import com.hogwarts.scm.model.SysRole;
+import com.hogwarts.scm.model.SysRoleUser;
 import com.hogwarts.scm.model.SysUser;
 import com.hogwarts.scm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RoleUserDao roleUserDao;
 
     @Override
     public SysUser getUser(String username) {
@@ -29,5 +36,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public Results<SysUser> getAllUserbyPage(Integer offset, Integer limit) {
         return Results.success(userDao.countAllUsers().intValue(), userDao.getUserbyPage(offset, limit));
+    }
+
+    @Override
+    public Results<SysUser> save(SysUser user, Integer roleId) {
+        if(roleId!= null) {
+            // save to user
+            userDao.save(user);
+            SysRoleUser sysRoleUser = new SysRoleUser();
+            sysRoleUser.setRoleId(roleId);
+            sysRoleUser.setUserId(user.getId().intValue());
+            roleUserDao.save(sysRoleUser);
+            return Results.success();
+        }
+        return Results.failure();
     }
 }
