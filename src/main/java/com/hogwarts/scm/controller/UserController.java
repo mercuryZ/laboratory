@@ -1,6 +1,7 @@
 package com.hogwarts.scm.controller;
 
 import com.hogwarts.scm.base.result.PageTableRequest;
+import com.hogwarts.scm.base.result.ResponseCode;
 import com.hogwarts.scm.base.result.Results;
 import com.hogwarts.scm.dao.UserDao;
 import com.hogwarts.scm.dto.UserDto;
@@ -79,6 +80,11 @@ public class UserController {
     @PostMapping("/add")
     @ResponseBody
     public Results<SysUser> saveUser(UserDto userDto, Integer roleId) {
+        SysUser sysUser = null;
+        sysUser = userService.getUserByTelephone(userDto.getTelephone());
+        if(sysUser != null && !(sysUser.getId().equals(userDto.getId())) ) {
+            return Results.failure(ResponseCode.PHONE_REPEAT.getCode(), ResponseCode.PHONE_REPEAT.getMessage());
+        }
         userDto.setStatus(1);
         userDto.setPassword(MD5.crypt(userDto.getPassword()));
         System.out.println(userDto.toString()+roleId);

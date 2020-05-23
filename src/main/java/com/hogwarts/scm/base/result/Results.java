@@ -16,12 +16,12 @@ public class Results<T>  implements Serializable {
 
     public Results() {
     }
+
     public Results(Integer code, String msg) {
-        super();
+        super(); // 从子类中调用父类的构造方法
         this.code = code;
         this.msg = msg;
     }
-
 
     public Results(Integer code, String msg, T data, Integer count, List<T> datas) {
         this.code = code;
@@ -30,7 +30,6 @@ public class Results<T>  implements Serializable {
         this.count = count;
         this.datas = datas;
     }
-
 
     /* 无数据传输的 成功返回 */
     public static <T> Results<T> success() {

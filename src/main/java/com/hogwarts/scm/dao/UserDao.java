@@ -22,9 +22,12 @@ public interface UserDao {
     List<SysUser> getUserbyPage(@Param("startPosition") Integer startPosition, @Param("limit") Integer limit);
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into sys_user(username, password, nickname, phone, headImgUrl, " +
+    @Insert("insert into sys_user(username, password, nickname, headImgUrl, " +
             "telephone, email, birthday, sex, status, createTime, updateTime) " +
-            "values(#{username}, #{password}, #{nickname},#{phone}, #{headImgUrl} ," +
+            "values(#{username}, #{password}, #{nickname}, #{headImgUrl} ," +
             "#{telephone}, #{email}, #{birthday}, #{sex}, #{status}, now(), now() )")
     int save(SysUser user);
+
+    @Select("select * from sys_user t where t.telephone = #{telephone}")
+    SysUser getUserByTelephone(String telephone);
 }

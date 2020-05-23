@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
         }
         return Results.failure();
     }
+
+    @Override
+    public SysUser getUserByTelephone(String telephone) {
+        return userDao.getUserByTelephone(telephone);
+    }
 }

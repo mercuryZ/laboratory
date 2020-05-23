@@ -14,7 +14,6 @@ public class SysUser extends BaseEntity<Long>{
     private String password;
     private String nickname;
     private String headImgUrl;
-    private String phone;
     private String telephone;
     private String email;
     @JsonFormat(pattern = "yyyy-MM-dd")

@@ -78,22 +78,22 @@
           </div>
       </form>
     </div>
-    <script>
 
+    <script>
       layui.use(['form','layer', 'laydate'], function(){
-          $ = layui.jquery;
+        $ = layui.jquery;
         var form = layui.form
-        ,layer = layui.layer
-        ,laydate = layui.laydate;
-          getAllRole(function(){
-              layui.form.render('radio')
-          });
-          //日期
-          laydate.render({
-              elem: '#L_birthday'
-              ,format: 'yyyy-MM-dd' //可任意组合
-          });
-      
+          ,layer = layui.layer
+          ,laydate = layui.laydate;
+
+        getAllRole(function(){
+          layui.form.render('radio')
+        });
+        //日期
+        laydate.render({
+          elem: '#L_birthday'
+          ,format: 'yyyy-MM-dd' //可任意组合
+        });
         //自定义验证规则
         form.verify({
           nikename: function(value){
@@ -106,35 +106,34 @@
 
       //监听提交
         form.on('submit(edit)', function(data){
-            var rolelRadio = $("[name=roleId]:checked");
-            if(rolelRadio == undefined || rolelRadio.length <= 0){
-                layer.alert("请给该用户设置角色");
-                return false;
+          var rolelRadio = $("[name=roleId]:checked");
+          if(rolelRadio == undefined || rolelRadio.length <= 0){
+            layer.alert("请给该用户设置角色");
+            return false;
+          }
+          data.field.roleId = rolelRadio.val();
+          $.ajax({
+            url:"/user/edit",
+            type:"POST",
+            data:data.field,
+            dataType:'json',
+            success:function(result){
+              if(result.code == 500 || result.code == 5000100 || result.code == 5000101 || result.code == 5000102){
+                layer.alert(result.msg);
+              }else{
+                layer.alert("设置成功", {icon: 6},function () {
+                  //关闭当前frame
+                  xadmin.close();
+                  // 可以对父窗口进行刷新
+                  xadmin.father_reload();
+                });
+              }
             }
-            data.field.roleId = rolelRadio.val();
-            $.ajax({
-                url:"/user/edit",
-                type:"POST",
-                data:data.field,
-                dataType:'json',
-                success:function(result){
-                    if(result.code == 500 || result.code == 5000100 || result.code == 5000101 || result.code == 5000102){
-                        layer.alert(result.msg);
-                    }else{
-                        layer.alert("设置成功", {icon: 6},function () {
-                            //关闭当前frame
-                            xadmin.close();
-                            // 可以对父窗口进行刷新
-                            xadmin.father_reload();
-                        });
-                    }
-                }
-            });
+          });
           return false;
         });
-
-
       });
+
       function getAllRole(callback){
           $.ajax({
               url:"/role/all",
@@ -181,9 +180,6 @@
               }
           });
       }
-
-
-
   </script>
   </body>
 </html>
