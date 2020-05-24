@@ -97,4 +97,9 @@ public class UserController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat(pattern), true));
     }
 
+    @GetMapping("/edit")
+    public String editUser(Model model, SysUser sysUser) {
+        model.addAttribute(userService.getUserById(sysUser.getId()));
+        return "user/user-edit";
+    }
 }

@@ -30,4 +30,7 @@ public interface UserDao {
 
     @Select("select * from sys_user t where t.telephone = #{telephone}")
     SysUser getUserByTelephone(String telephone);
+
+    @Select("select * from sys_user t where t.id = #{id}")
+    SysUser getUserById(Long id);
 }

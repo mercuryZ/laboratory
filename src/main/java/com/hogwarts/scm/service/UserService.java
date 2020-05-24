@@ -14,4 +14,6 @@ public interface UserService {
     Results<SysUser> save(SysUser userDto, Integer roleId);
 
     SysUser getUserByTelephone(String Telephone);
+
+    SysUser getUserById(Long id);
 }

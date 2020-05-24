@@ -47,16 +47,16 @@
               </div>
           </div>
         <div class="layui-form-item">
-              <label for="L_telephone" class="layui-form-label">
-                  <span class="x-red">*</span>手机
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_telephone" th:value="${sysUser.telephone}" name="telephone" required="" lay-verify="telephone" autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  11位数字
-              </div>
+          <label for="L_telephone" class="layui-form-label">
+            <span class="x-red">*</span>手机
+          </label>
+          <div class="layui-input-inline">
+            <input type="text" id="L_telephone" th:value="${sysUser.telephone}" name="telephone" required="" lay-verify="telephone" autocomplete="off" class="layui-input">
           </div>
+          <div class="layui-form-mid layui-word-aux">
+            11位数字
+          </div>
+        </div>
         <div class="layui-form-item">
           <label for="L_email" class="layui-form-label">
               <span class="x-red">*</span>邮件
@@ -78,7 +78,7 @@
             <input type="radio" th:valuetype="${sysUser.sex}" name="sex" value="0" title="女">
           </div>
         </div>
-        <input type="text" id="roleId"  name="roleId" style="display:none;"/>
+        <input type="text" id="roleId" name="roleId" style="display:none;"/>
         <div class="layui-form-item">
           <label class="layui-form-label">角色</label>
           <div class="layui-input-block show-role-container"></div>
